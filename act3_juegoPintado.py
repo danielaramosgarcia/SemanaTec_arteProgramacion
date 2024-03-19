@@ -50,13 +50,35 @@ def draw_circle(start, end):
 
 def rectangle(start, end):
     """Draw rectangle from start to end."""
-    pass  # TODO
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+    initialDistance = end.x - start.x
+    smallerDistance = initialDistance * 0.7
+    flag = True
+    for count in range(4):
+        if flag:
+            forward(initialDistance)
+            flag = False
+        else:
+            forward(smallerDistance)
+            flag = True
+        left(90)
+    end_fill()
 
 
 def triangle(start, end):
-    """Draw triangle from start to end."""
-    pass  # TODO
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+    for count in range(3):
+        forward(end.x - start.x)
+        left(120)
 
+    end_fill()
+    
 
 def tap(x, y):
     """Store starting point or draw shape."""
