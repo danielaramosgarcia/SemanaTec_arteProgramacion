@@ -13,7 +13,13 @@ from turtle import *
 
 from freegames import vector
 
-
+"""
+Funcion que dibuja visualmente una linea desde el punto de inicio hasta el punto final
+Se usa la funcion up() para levantar el lapiz y no dejar rastro de la linea mientras se posiciona
+Se usa la funcion goto() para mover el lapiz a la posicion de inicio
+Se usa la funcion down() para bajar el lapiz y dejar rastro de la linea mientras se dibuja
+Se usa la funcion goto() para mover el lapiz a la posicion final
+"""
 def line(start, end):
     """Draw line from start to end."""
     up()
@@ -21,7 +27,14 @@ def line(start, end):
     down()
     goto(end.x, end.y)
 
-
+"""
+Funcion que dibuja visualmente un cuadrado desde el punto de inicio hasta el punto final
+Se usa la funcion up() para levantar el lapiz y no dejar rastro de la linea mientras se posiciona
+Se usa la funcion goto() para mover el lapiz a la posicion de inicio
+Se usa la funcion down() para bajar el lapiz y dejar rastro de la linea mientras se dibuja
+Se usa la funcion begin_fill() para empezar a rellenar la figura
+Se usa la funcion forward() para mover el lapiz hacia adelante la distancia entre el punto de inicio y el punto final
+"""
 def square(start, end):
     """Draw square from start to end."""
     up()
@@ -35,7 +48,14 @@ def square(start, end):
 
     end_fill()
 
-
+"""
+Funcion que dibuja visualmente un circulo desde el punto de inicio hasta el punto final
+Se usa la funcion up() para levantar el lapiz y no dejar rastro de la linea mientras se posiciona
+Se usa la funcion goto() para mover el lapiz a la posicion de inicio
+Se usa la funcion down() para bajar el lapiz y dejar rastro de la linea mientras se dibuja
+Se usa la funcion begin_fill() para empezar a rellenar la figura
+Se usa la funcion circle() para dibujar un circulo con un radio de 50
+"""
 def draw_circle(start, end):
     """Draw circle from start to end."""
     up()
@@ -47,7 +67,16 @@ def draw_circle(start, end):
     end_fill()
 
 
-
+"""
+Funcion que dibuja visualmente un rectangulo desde el punto de inicio hasta el punto final
+Se usa la funcion up() para levantar el lapiz y no dejar rastro de la linea mientras se posiciona
+Se usa la funcion goto() para mover el lapiz a la posicion de inicio
+Se usa la funcion down() para bajar el lapiz y dejar rastro de la linea mientras se dibuja
+Se usa la funcion begin_fill() para empezar a rellenar la figura
+Se usa la funcion forward() para mover el lapiz hacia adelante la distancia entre el punto de inicio y el punto final
+Se usa la funcion left() para girar el lapiz 90 grados a la izquierda
+Se usa la funcion end_fill() para dejar de rellenar la figura
+"""
 def rectangle(start, end):
     """Draw rectangle from start to end."""
     up()
@@ -67,7 +96,15 @@ def rectangle(start, end):
         left(90)
     end_fill()
 
-
+"""
+Funcion que dibuja visualmente un triangulo desde el punto de inicio hasta el punto final
+Se usa la funcion up() para levantar el lapiz y no dejar rastro de la linea mientras se posiciona
+Se usa la funcion goto() para mover el lapiz a la posicion de inicio
+Se usa la funcion down() para bajar el lapiz y dejar rastro de la linea mientras se dibuja
+Se usa la funcion begin_fill() para empezar a rellenar la figura
+Se usa la funcion forward() para mover el lapiz hacia adelante la distancia entre el punto de inicio y el punto final
+Se usa la funcion left() para girar el lapiz 120 grados a la izquierda
+"""
 def triangle(start, end):
     up()
     goto(start.x, start.y)
@@ -79,7 +116,9 @@ def triangle(start, end):
 
     end_fill()
     
-
+"""
+Funcion que deshace el ultimo movimiento del lapiz
+"""
 def tap(x, y):
     """Store starting point or draw shape."""
     start = state['start']
@@ -92,11 +131,16 @@ def tap(x, y):
         shape(start, end)
         state['start'] = None
 
-
+"""
+Funcion que cambia el color de la linea y el relleno de la figura
+"""
 def store(key, value):
     """Store value in state at key."""
     state[key] = value
 
+"""
+Parte del codigo que se encarga de cambiar el color de la linea y el relleno de la figura segun la tecla presionada
+"""
 
 state = {'start': None, 'shape': line}
 setup(420, 420, 370, 0)
