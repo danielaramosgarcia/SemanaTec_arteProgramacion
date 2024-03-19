@@ -1,3 +1,9 @@
+
+#Daniela Ramos A01174259
+#Gael Garcia A00833115
+#Jaennette A01236226
+
+
 """Paint, for drawing shapes.
 
 Exercises
