@@ -1,5 +1,6 @@
 #Jeannette A01236226
 #Daniela Ramos A01174259
+#gael Garcia A00833115
 """Snake, classic arcade game.
 
 Exercises
