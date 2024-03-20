@@ -1,3 +1,4 @@
+#Jeannette A01236226
 """Snake, classic arcade game.
 
 Exercises
@@ -70,9 +71,11 @@ def move():
         snake.pop(0)
 
     clear()
+    
+    snakecolor=changecolor()
 
     for body in snake:
-        square(body.x, body.y, 9, changecolor())
+        square(body.x, body.y, 9, snakecolor)
 
     square(food.x, food.y, 9, changecolor())
     update()
