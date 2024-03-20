@@ -1,3 +1,4 @@
+#Jeannette A01236226
 """Snake, classic arcade game.
 
 Exercises
@@ -11,6 +12,7 @@ Exercises
 from random import *
 from turtle import *
 
+
 from freegames import square, vector
 
 food = vector(0, 0)
@@ -18,13 +20,20 @@ snake = [vector(10, 0)]
 aim = vector(0, -10)
 aimRandom = choice([vector(choice([-10, 10]), 0), vector(0, choice([-10, 10]))])
 
-
+"""
+Funcion que cambia la direccion de la serpiente
+"""
 def change(x, y):
     """Change snake direction."""
     aim.x = x
     aim.y = y
 
-
+"""
+Funcion que determina si la cabeza de la serpiente se encuentra dentro
+de los limites de la pantalla.
+Devuelve verdadero si entra dentro de los limites
+Devuelve falso si no
+"""
 def inside(head):
     """Return True if head inside boundaries."""
     return -200 < head.x < 190 and -200 < head.y < 190
@@ -46,7 +55,20 @@ def moveFood():
         update()
     #La comida se movera a la mitad de la velocidad que la serpiente
     ontimer(moveFood, 200) 
+"""
+Funcion que elige un color al azar de un arreglo de colores colorschoice
+Se define el arreglo de 5 colores
+Se devuelve un color al azar del arreglo con la funcion choice de la libreria random
+"""
+def changecolor():
+    colorschoice=['orange','yellow','green','blue','purple']
+    return choice(colorschoice)
 
+"""
+Funcion que define el movimiento de la serpiente
+Se usa la funcion inside para verificar si la cabeza esta dentro de los limites
+Se usa la funcion changecolor para cambiar el color de la serpiente y la comida al azar
+"""
 def move():
     """Move snake forward one segment."""
     head = snake[-1].copy()
@@ -67,11 +89,13 @@ def move():
         snake.pop(0)
 
     clear()
+    
+    snakecolor=changecolor()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, snakecolor)
 
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, changecolor())
     update()
     ontimer(move, 100)
 
