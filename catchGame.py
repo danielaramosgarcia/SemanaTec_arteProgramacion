@@ -24,6 +24,17 @@ import time
 # Define una lista para almacenar las letras atrapadas
 letras_atrapadas = []
 
+#Funcion para asignar una palabra
+def palabra():
+    palabra_pantalla = turtle.Turtle()  # Nueva tortuga para dibujar la palabra formada
+    words = ['parque', 'manzana', 'amarillo']
+    selected_word = choice(words)  # Elegir una letra aleatoria de la lista
+    palabra_pantalla.penup()
+    palabra_pantalla.hideturtle()
+    palabra_pantalla.goto(-100, 160)
+    palabra_pantalla.color("black")
+    palabra_pantalla.write(f"Palabra a formar: {''.join(selected_word)}", font=("Arial", 16, "bold"))
+
 # Función para detectar colisiones entre dos objetos
 def detectar_colision(objeto1, objeto2):
     distancia = objeto1.distance(objeto2)
@@ -38,7 +49,7 @@ def actualizar_letras_atrapadas():
     letras_pantalla.undo()  # Deshacer el texto anterior
     letras_pantalla.penup()
     letras_pantalla.hideturtle()
-    letras_pantalla.goto(-100, 150)
+    letras_pantalla.goto(-100, 120)
     letras_pantalla.color("black")
     letras_pantalla.write(f"Palabra formada: {''.join(letras_atrapadas)}", font=("Arial", 16, "bold"))
     
@@ -135,7 +146,9 @@ turtle.onkey(move_right, 'Right')
 turtle.onkey(move_left, 'Left')
 
 pen.penup()
-# Llamada para generar letras 
+#Generar palabra a formar
+palabra()
+#Generar letras 
 screen.ontimer(generate_falling_letters, 1000)
 
 screen.mainloop()
