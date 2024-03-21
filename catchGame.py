@@ -23,12 +23,15 @@ import time
 
 # Define una lista para almacenar las letras atrapadas
 letras_atrapadas = []
-
+indicePalabra = 0
+palabraGenerada = ""
 #Funcion para asignar una palabra
 def palabra():
+    global palabraGenerada
     palabra_pantalla = turtle.Turtle()  # Nueva tortuga para dibujar la palabra formada
     words = ['parque', 'manzana', 'amarillo']
     selected_word = choice(words)  # Elegir una letra aleatoria de la lista
+    palabraGenerada = selected_word
     palabra_pantalla.penup()
     palabra_pantalla.hideturtle()
     palabra_pantalla.goto(-100, 160)
@@ -56,6 +59,7 @@ def actualizar_letras_atrapadas():
 
 # Función para generar letras que caen
 def generate_falling_letters():
+    global palabraGenerada, indicePalabra
     falling_pen = turtle.Turtle()  # Nueva tortuga para dibujar las letras que caen
     falling_pen.hideturtle()
     falling_pen.penup()
@@ -80,8 +84,10 @@ def generate_falling_letters():
             # Detectar colisión con la canasta
             if detectar_colision(falling_pen, pen):
                 falling_pen.clear()  # Borrar la letra atrapada
-                letras_atrapadas.append(letter)  # Agregar la letra atrapada a la lista
-                actualizar_letras_atrapadas()
+                if palabraGenerada[indicePalabra] == letter:
+                    letras_atrapadas.append(letter)  # Agregar la letra atrapada a la lista
+                    indicePalabra += 1
+                    actualizar_letras_atrapadas()
                 print("Letra atrapada:", letter)  # Imprimir la letra atrapada
                 print("Letras atrapadas:", letras_atrapadas)  # Imprimir la lista de letras atrapadas
                 break
