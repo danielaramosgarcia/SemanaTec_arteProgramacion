@@ -64,7 +64,7 @@ def generate_falling_letters():
     falling_pen.hideturtle()
     falling_pen.penup()
 
-    letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    letters = palabraGenerada
 
     while True:
         letter = choice(letters)  # Elegir una letra aleatoria de la lista
@@ -96,7 +96,6 @@ def generate_falling_letters():
             
         # Esperar antes de generar una nueva letra
         time.sleep(0.1)
-
 # Function to draw a rectangle
 def draw_rectangle(turtle, color, x, y, width, height):
     turtle.penup()
