@@ -20,7 +20,7 @@ car = path('car.gif')
 tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
-
+tab_count = 0
 
 def square(x, y):
     """Draw white square with black outline at (x, y)."""
@@ -47,6 +47,10 @@ def xy(count):
 
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
+    global tab_count
+    tab_count += 1
+    print(f"Tab count: {tab_count}")
+
     spot = index(x, y)
     mark = state['mark']
 
@@ -59,7 +63,7 @@ def tap(x, y):
 
 #Se modifico la ubicacion de los numeros al dar tab para que se vean centrados
 def draw():
-    """Draw image and tiles."""
+    """Draw image, tiles, and tab count."""
     clear()
     goto(0, 0)
     shape(car)
@@ -76,19 +80,26 @@ def draw():
         x, y = xy(mark)
         up()
         if tiles[mark] < 10:
-            center = 17 # Centrar numeros de un digito
+            center = 17  # Center single-digit numbers
         else:
-            center = 10  # Centrar numeros de dos digitos
+            center = 10  # Center two-digit numbers
         goto(x + center, y + 7)
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
+
+    # Display tab count
+    up()
+    goto(-50, 200)  # Adjust the coordinates as needed
+    color('pink')
+    down()
+    write(f"Tab count: {tab_count}", font=('Arial', 20, 'bold'))
 
     update()
     ontimer(draw, 100)
 
 
 shuffle(tiles)
-setup(420, 420, 370, 0)
+setup(480, 480, 370, 0)
 addshape(car)
 hideturtle()
 tracer(False)
