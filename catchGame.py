@@ -55,6 +55,12 @@ def actualizar_letras_atrapadas():
     letras_pantalla.goto(-100, 120)
     letras_pantalla.color("black")
     letras_pantalla.write(f"Palabra formada: {''.join(letras_atrapadas)}", font=("Arial", 16, "bold"))
+    if(palabraGenerada== ''.join(letras_atrapadas)):
+        letras_pantalla.penup()
+        letras_pantalla.hideturtle()
+        letras_pantalla.goto(-80, 0)
+        letras_pantalla.color("black")
+        letras_pantalla.write("¡Ganaste!", font=('Arial', 20, 'bold'))
     
 
 # Función para generar letras que caen
