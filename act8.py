@@ -11,6 +11,7 @@ Exercises:
 
 #Daniela Ramos Garcia A01174259
 #Ángel Gael García Rangel A00833115
+#Jeannette Arjona Hernandez A01236226
 """ 
 Instrucciones:
 Antes de comenzar el juego, la línea de comandos te preguntará si quieres usar letras o números. 
