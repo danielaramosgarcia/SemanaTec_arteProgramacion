@@ -23,10 +23,10 @@ writer = Turtle(visible=False)
 aim = vector(5, 0)
 pacman = vector(-40, -80)
 ghosts = [
-    [vector(-120, 160), vector(5, 0)],
-    [vector(-80, -160), vector(0, 5)],
-    [vector(80, 160), vector(0, -5)],
-    [vector(40, -160), vector(-5, 0)],
+    [vector(-120, 160), vector(20, 0)],
+    [vector(-80, -160), vector(0, 20)],
+    [vector(80, 160), vector(0, -20)],
+    [vector(40, -160), vector(-20, 0)],
 ]
 # fmt: off
 tiles = [
@@ -105,6 +105,16 @@ def world():
                 path.goto(x + 10, y + 10)
                 path.dot(2, 'white')
 
+"""Calcular direccion hacia pacman para hacer inteligentes a los fantasmas"""
+def moverHaciaPacman(posicionP, posicionG):
+    distanciaX =   posicionP.x - posicionG.x
+    distanciaY = posicionP.y - posicionG.y
+    
+    if abs(distanciaX) > abs(distanciaY):
+        return vector(distanciaX / abs(distanciaX), 0)
+    else:
+        return vector(0, distanciaY / abs(distanciaY))
+    
 """Move pacman and all ghosts."""
 def move():
     writer.undo()
@@ -127,16 +137,20 @@ def move():
     up()
     goto(pacman.x + 10, pacman.y + 10)
     dot(20, 'yellow')
-
+    
+    for ghost in ghosts:
+        dirHaciaPacman = moverHaciaPacman(pacman, ghost[0])
+        ghost[1] = dirHaciaPacman
+        
     for point, course in ghosts:
         if valid(point + course):
             point.move(course)
         else:
             options = [
-                vector(5, 0),
-                vector(-5, 0),
-                vector(0, 5),
-                vector(0, -5),
+                vector(20, 0),
+                vector(-20, 0),
+                vector(0, 20),
+                vector(0, -20),
             ]
             plan = choice(options)
             course.x = plan.x
