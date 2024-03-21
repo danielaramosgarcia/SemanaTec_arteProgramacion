@@ -25,6 +25,8 @@ import time
 letras_atrapadas = []
 indicePalabra = 0
 palabraGenerada = ""
+vida = 5
+flag = True
 #Funcion para asignar una palabra
 def palabra():
     global palabraGenerada
@@ -45,7 +47,15 @@ def detectar_colision(objeto1, objeto2):
         return True
     else:
         return False
-    
+def actualizar_vida():
+    print(vida)
+    letras_pantalla = turtle.Turtle()  # Nueva tortuga para dibujar la palabra formada
+    letras_pantalla.undo()
+    letras_pantalla.penup()
+    letras_pantalla.hideturtle()
+    letras_pantalla.goto(-100, 100)
+    letras_pantalla.color("black")
+    letras_pantalla.write((f"Vidas: {str(vida)}"), font=("Arial", 16, "bold"))
     
 def actualizar_letras_atrapadas():
     letras_pantalla = turtle.Turtle()  # Nueva tortuga para dibujar la palabra formada
@@ -61,18 +71,28 @@ def actualizar_letras_atrapadas():
         letras_pantalla.goto(-80, 0)
         letras_pantalla.color("black")
         letras_pantalla.write("¡Ganaste!", font=('Arial', 20, 'bold'))
+    if vida == 0:
+        letras_pantalla.penup()
+        letras_pantalla.hideturtle()
+        letras_pantalla.goto(-80, 0)
+        letras_pantalla.color("black")
+        letras_pantalla.write("Se han acabado tus vidas!", font=('Arial', 20, 'bold'))
+        
     
 
 # Función para generar letras que caen
 def generate_falling_letters():
-    global palabraGenerada, indicePalabra
+    global palabraGenerada, indicePalabra, vida, flag
+    if vida > 0:
+        flag = True
     falling_pen = turtle.Turtle()  # Nueva tortuga para dibujar las letras que caen
     falling_pen.hideturtle()
     falling_pen.penup()
 
     letters = palabraGenerada
 
-    while True:
+    while flag:
+        actualizar_vida()
         letter = choice(letters)  # Elegir una letra aleatoria de la lista
         x = randint(-250, 250)  # Posición aleatoria en el eje x
         y = 200  # Empiezan desde arriba
@@ -93,7 +113,9 @@ def generate_falling_letters():
                 if palabraGenerada[indicePalabra] == letter:
                     letras_atrapadas.append(letter)  # Agregar la letra atrapada a la lista
                     indicePalabra += 1
-                    actualizar_letras_atrapadas()
+                else:
+                    vida -= 1
+                actualizar_letras_atrapadas()
                 print("Letra atrapada:", letter)  # Imprimir la letra atrapada
                 print("Letras atrapadas:", letras_atrapadas)  # Imprimir la lista de letras atrapadas
                 break
