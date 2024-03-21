@@ -95,6 +95,16 @@ def draw():
     write(f"Tab count: {tab_count}", font=('Arial', 20, 'bold'))
 
     update()
+    
+    # Verificar si ya se acabaron las tabs
+    if all(not item for item in hide):
+        up()
+        goto(-80, 0)
+        color('yellow')
+        down()
+        write("¡Ganaste!", font=('Arial', 20, 'bold'))
+        update()
+        
     ontimer(draw, 100)
 
 
