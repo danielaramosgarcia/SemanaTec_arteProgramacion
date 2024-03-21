@@ -1,3 +1,6 @@
+# Daniela Ramos 
+# Jeannete Arjona 
+# Gael García
 """Cannon, hitting targets with projectiles.
 
 Exercises
@@ -75,8 +78,11 @@ def move():
     draw()
 
     for target in targets:
+        #Cuando el target no esta dentro de la pantalla
         if not inside(target):
-            return
+            #Se reposiciona el target
+            target.x = 200
+            target.y = randrange(-150, 150)
 
     ontimer(move, 50)
 
