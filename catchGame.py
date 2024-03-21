@@ -18,7 +18,8 @@ import turtle
 from freegames import vector
 import time
 
-# Set up the screen
+#Daniela Ramos A01174259
+
 
 # Define una lista para almacenar las letras atrapadas
 letras_atrapadas = []
@@ -31,6 +32,17 @@ def detectar_colision(objeto1, objeto2):
     else:
         return False
     
+    
+def actualizar_letras_atrapadas():
+    letras_pantalla = turtle.Turtle()  # Nueva tortuga para dibujar la palabra formada
+    letras_pantalla.undo()  # Deshacer el texto anterior
+    letras_pantalla.penup()
+    letras_pantalla.hideturtle()
+    letras_pantalla.goto(-100, 150)
+    letras_pantalla.color("black")
+    letras_pantalla.write(f"Palabra formada: {''.join(letras_atrapadas)}", font=("Arial", 16, "bold"))
+    
+
 # Función para generar letras que caen
 def generate_falling_letters():
     falling_pen = turtle.Turtle()  # Nueva tortuga para dibujar las letras que caen
@@ -44,21 +56,23 @@ def generate_falling_letters():
         x = randint(-250, 250)  # Posición aleatoria en el eje x
         y = 200  # Empiezan desde arriba
         falling_pen.goto(x, y)
-        falling_pen.write(letter, align="center", font=("Arial", 16, "normal"))
+        falling_pen.write(letter, align="center", font=("Arial", 20, "normal"))
 
         # Hacer que la letra caiga gradualmente
         while y > -200:
-            y -= 8  # Mover hacia abajo
+            y -= 9  # Mover hacia abajo
             falling_pen.clear()  # Borrar la letra anterior
             falling_pen.goto(x, y)  # Mover a la nueva posición
-            falling_pen.write(letter, align="center", font=("Arial", 16, "normal"))
+            falling_pen.write(letter, align="center", font=("Arial", 20, "normal"))
             screen.update()  # Actualizar la pantalla manualmente
             
             # Detectar colisión con la canasta
             if detectar_colision(falling_pen, pen):
                 falling_pen.clear()  # Borrar la letra atrapada
                 letras_atrapadas.append(letter)  # Agregar la letra atrapada a la lista
+                actualizar_letras_atrapadas()
                 print("Letra atrapada:", letter)  # Imprimir la letra atrapada
+                print("Letras atrapadas:", letras_atrapadas)  # Imprimir la lista de letras atrapadas
                 break
                 
             time.sleep(0.2)
@@ -84,9 +98,10 @@ def draw_rectangle(turtle, color, x, y, width, height):
 screen = turtle.Screen()
 screen.setup(width=600, height=400)
 screen.bgcolor("lightblue")  # Set sky color
-
 pen = turtle.Turtle()
 pen.speed(0)  # Set drawing speed to fastest
+
+
 
 # Draw grass
 draw_rectangle(pen, "lightgreen", -300, -100, 600, 200)
@@ -106,7 +121,6 @@ pen.goto(positon.x, positon.y)
 screen.addshape("basket.gif")
 pen.shape("basket.gif")
 
-
 turtle.listen()
 
 def move_right():
@@ -120,6 +134,7 @@ def move_left():
 turtle.onkey(move_right, 'Right')
 turtle.onkey(move_left, 'Left')
 
+pen.penup()
 # Llamada para generar letras 
 screen.ontimer(generate_falling_letters, 1000)
 
