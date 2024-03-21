@@ -52,9 +52,27 @@ pen.begin_fill()
 pen.circle(50)
 pen.end_fill()
 
-# Hide the turtle and display the result
-pen.hideturtle()
-screen.mainloop()
 
+# Set the shape of the turtle to the image "basket.gif"
+positon = vector(0, -50)
+pen.goto(positon.x, positon.y)
+screen.addshape("basket.gif")
+pen.shape("basket.gif")
+
+
+turtle.listen()
+
+def move_right():
+    positon.x += 10
+    pen.goto(positon.x, positon.y)
+
+def move_left():
+    positon.x -= 10
+    pen.goto(positon.x, positon.y)
+
+turtle.onkey(move_right, 'Right')
+turtle.onkey(move_left, 'Left')
+
+screen.mainloop()
 
 
