@@ -123,6 +123,10 @@ def generate_falling_letters():
                 break
                 
             time.sleep(0.2)
+        
+        if palabraGenerada[indicePalabra] == letter:
+            vida -= 1
+
             
         # Esperar antes de generar una nueva letra
         time.sleep(0.1)
