@@ -1,15 +1,13 @@
 # Daniela Ramos A01174259
 # Jeannete Arjona A01236226
-# Gael 
+# Ángel Gael García Rangel A00833115 
 
 """
 Catch Game
 
-This is a game where letters fall from the top of the screen and the player needs to catch them to form words.
+El juego consiste en letras cayendo desde el cielo, tu misión como jugador es atrapar las necesarias para formar la palabra indicada.
 
-The objective of the game is to catch as many letters as possible and create as many words as you can within a given time limit.
-
-Enjoy the challenge and have fun playing!
+Tienes 5 vidas, cada letra atrapada que no sea la correspondiente a la palabra representará una vida menos.
 
 """
 
@@ -24,6 +22,7 @@ indicePalabra = 0
 palabraGenerada = ""
 vida = 5
 flag = True
+
 #Funcion para asignar una palabra
 def palabra():
     global palabraGenerada
@@ -37,7 +36,8 @@ def palabra():
     palabra_pantalla.color("black")
     palabra_pantalla.write(f"Palabra a formar: {''.join(selected_word)}", font=("Arial", 16, "bold"))
 
-# Función para detectar colisiones entre dos objetos
+
+# Función para detectar colisiones entre dos objetos (canast y letra)
 def detectar_colision(objeto1, objeto2):
     distancia = objeto1.distance(objeto2)
     if distancia < 20:  # Tamaño aproximado de la canasta
@@ -46,6 +46,8 @@ def detectar_colision(objeto1, objeto2):
         return False
     
 letras_pantalla = turtle.Turtle()  # Nueva tortuga para dibujar la palabra formada
+
+#Función para actualizar el número de vidas restantes
 def actualizar_vida():
     print(vida)
     letras_pantalla.clear()
@@ -55,6 +57,7 @@ def actualizar_vida():
     letras_pantalla.color("black")
     letras_pantalla.write((f"Vidas: {str(vida)}"), font=("Arial", 16, "bold"))
     
+#Función para actualizar la subpalabra formada hasta el momento
 def actualizar_letras_atrapadas():
     letras_pantalla = turtle.Turtle()  # Nueva tortuga para dibujar la palabra formada
     letras_pantalla.undo()  # Deshacer el texto anterior
@@ -76,9 +79,7 @@ def actualizar_letras_atrapadas():
         letras_pantalla.color("black")
         letras_pantalla.write("Se han acabado tus vidas!", font=('Arial', 20, 'bold'))
         
-    
-
-# Función para generar letras que caen
+# Función que representa el ciclo principal para generar las palabras que caen y para detectar colisiones entre canasta y letras.
 def generate_falling_letters():
     global palabraGenerada, indicePalabra, vida, flag
     if vida > 0 and palabraGenerada != ''.join(letras_atrapadas):
@@ -125,7 +126,8 @@ def generate_falling_letters():
             
         # Esperar antes de generar una nueva letra
         time.sleep(0.1)
-# Function to draw a rectangle
+        
+#  Función para el dibujado de un rectángulo
 def draw_rectangle(turtle, color, x, y, width, height):
     turtle.penup()
     turtle.goto(x, y)
@@ -139,19 +141,17 @@ def draw_rectangle(turtle, color, x, y, width, height):
         turtle.right(90)
     turtle.end_fill()
 
-# Initialize the screen and turtle
+# Incialización de la pantalla y el Turtle
 screen = turtle.Screen()
 screen.setup(width=600, height=400)
-screen.bgcolor("lightblue")  # Set sky color
+screen.bgcolor("lightblue")  
 pen = turtle.Turtle()
-pen.speed(0)  # Set drawing speed to fastest
+pen.speed(0) 
 
-
-
-# Draw grass
+# Dibujar rectángulo
 draw_rectangle(pen, "lightgreen", -300, -100, 600, 200)
 
-# Draw sun
+# Dibujar sol
 pen.penup()
 pen.goto(200, 150)
 pen.color("yellow")
@@ -159,8 +159,7 @@ pen.begin_fill()
 pen.circle(50)
 pen.end_fill()
 
-
-# Set the shape of the turtle to the image "basket.gif"
+# Aignar la Turtle a la imagen "basket.gif"
 positon = vector(0, -50)
 pen.goto(positon.x, positon.y)
 screen.addshape("basket.gif")
@@ -180,9 +179,9 @@ turtle.onkey(move_right, 'Right')
 turtle.onkey(move_left, 'Left')
 
 pen.penup()
-#Generar palabra a formar
-palabra()
-#Generar letras 
+#Generamos palabra a formar
+palabra() 
+#Generamos las letras cayendo 
 screen.ontimer(generate_falling_letters, 1000)
 
 screen.mainloop()
