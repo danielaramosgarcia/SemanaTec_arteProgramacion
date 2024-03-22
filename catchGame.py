@@ -28,7 +28,7 @@ flag = True
 def palabra():
     global palabraGenerada
     palabra_pantalla = turtle.Turtle()  # Nueva tortuga para dibujar la palabra formada
-    words = ['parque', 'manzana', 'amarillo']
+    words = ['hola', 'arbol', 'cosa']
     selected_word = choice(words)  # Elegir una letra aleatoria de la lista
     palabraGenerada = selected_word
     palabra_pantalla.penup()
@@ -81,7 +81,7 @@ def actualizar_letras_atrapadas():
 # Función para generar letras que caen
 def generate_falling_letters():
     global palabraGenerada, indicePalabra, vida, flag
-    if vida > 0:
+    if vida > 0 and palabraGenerada != ''.join(letras_atrapadas):
         flag = True
     falling_pen = turtle.Turtle()  # Nueva tortuga para dibujar las letras que caen
     falling_pen.hideturtle()
@@ -99,6 +99,9 @@ def generate_falling_letters():
 
         # Hacer que la letra caiga gradualmente
         while y > -200:
+            if vida <= 0 or palabraGenerada == ''.join(letras_atrapadas):  # Verificar si las vidas son 0
+                flag = False  # Detener la generación de letras
+                break
             y -= 9  # Mover hacia abajo
             falling_pen.clear()  # Borrar la letra anterior
             falling_pen.goto(x, y)  # Mover a la nueva posición
