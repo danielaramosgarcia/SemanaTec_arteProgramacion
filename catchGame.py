@@ -1,5 +1,5 @@
 # Daniela Ramos A01174259
-# Jeannete 
+# Jeannete Arjona A01236226
 # Gael 
 
 """
@@ -17,9 +17,6 @@ from random import *
 import turtle
 from freegames import vector
 import time
-
-#Daniela Ramos A01174259
-
 
 # Define una lista para almacenar las letras atrapadas
 letras_atrapadas = []
@@ -47,10 +44,11 @@ def detectar_colision(objeto1, objeto2):
         return True
     else:
         return False
+    
+letras_pantalla = turtle.Turtle()  # Nueva tortuga para dibujar la palabra formada
 def actualizar_vida():
     print(vida)
-    letras_pantalla = turtle.Turtle()  # Nueva tortuga para dibujar la palabra formada
-    letras_pantalla.undo()
+    letras_pantalla.clear()
     letras_pantalla.penup()
     letras_pantalla.hideturtle()
     letras_pantalla.goto(-100, 100)
